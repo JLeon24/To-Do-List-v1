@@ -1,30 +1,26 @@
-// Required code to use express, bodyParser
+// Required codes to run express, body parser, ejs
 const express = require("express");
-const bodyParser = require("body-parser");
+const bodyParser = require("body-parser")
 const app = express();
+var port = 3000; // Created a variable and assign a value of the port to use
 
-// Required code to use EJS
-app.set("view engine", "ejs");
-
-// code to use body parser to get the value from the textbox
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-// Create a variable array to hold the items.
-var items = ["Buy Food", "Cook Food", "Eat Food"];
+app.set("view engine", "ejs");
 
-//------------------------------------------------------------------
 
-//Load up to home page, to view the current date and list items
+var items = ["Buy Food", "Cook Food", "Eat Food"]; //Created a variable to store initial list items
 
-//Express code. Handles the GET request
-app.get("/", function(req, res) {
+//--------------- Load up to home page, to view the current date and list items
 
-  // Create a variable to hold the the date and time (method)
-  var today = new Date();
 
-  //Create a variable to hold an Object to format the date
+app.get("/", (req, res) => {
+
+  var today = new Date(); // Created a variable to store the date today (method)
+
+  //Created an object and assigned to a variable. Use to format the date
   var options = {
     weekday: "long",
     year: "numeric",
@@ -32,7 +28,7 @@ app.get("/", function(req, res) {
     month: "long"
   }
 
-  //Create a variable to hold the date to string format
+  // Created a variable and assign the var options as a callback to the object today.toLocaleDateString("en-US", options
   var day = today.toLocaleDateString("en-US", options);
 
   // Render EJS and Pass the var day (kindOfDay) and items(newListItems) to the FrontEnd (EJS file)
@@ -43,17 +39,24 @@ app.get("/", function(req, res) {
 
 });
 
-//------------------------------------------------------------------
+
+//--------------- Load up to home page, to view the current date and list items
 
 //Express code. Handles the POST request, it will catch the data from newItem in FrontEnd
-app.post("/", function(req, res) {
-  var item = req.body.newItem; // the value of the newItem is stored to var item. Used bodyparser to get the value.
-  items.push(item); // add the item to the array items
-  res.redirect("/"); // redirect to the home route
+app.post ("/", (req, res) => {
+  var item = req.body.newItem; // the value of the newItem is stored to var item using body parser
+  items.push(item); // Push the item value to the items array
+  res.redirect("/"); // Redirect to the home route
+
 });
 
 
-// Confirmation for the node server
-app.listen(3000, function() {
-  console.log("Server started on port 3000");
+
+// Check if the server is running.
+app.listen(port, (err) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Server listening to port " + port);
+  }
 });

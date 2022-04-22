@@ -3,32 +3,33 @@
 
 <head>
   <meta charset="utf-8">
-  <title>ToDo List</title>
+  <title>ToDo List v1</title>
 </head>
 
 <body>
-
-
-<!-- Pass the value to kindOfDay from BackEnd-->
+  <!-- Pass the value to kindOfDay from BackEnd-->
   <h1> <%= kindOfDay %> </h1>
 
   <ul>
-  <!-- Created a for loop inside the ul that will loop through the entire length of newListItems array.
-  It will then render a new li for each newListItems in the array.
 
-  Used EJS sytanx to add control flow-->
-    <% for (var i = 0; i < newListItems.length; i++){ %>
-    <li><%= newListItems[i] %></li>
-    <%  } %>
+    <!-- Created a for loop inside the ul that will loop through the entire length of newListItems array.
+    It will then render a new li for each newListItems in the array.
+
+    Used EJS sytanx to add control flow-->
+
+    <%for (var i = 0; i < newListItems.length; i++){%>
+    <li> <%= newListItems[i] %></li>
+    <% } %>
+
   </ul>
 
-  <!-- Created a form for the send data to the BackEnd via POST method, the request will be triggered in the home
-route ("/") -->
+  <!-- Created a form to send data to the BackEnd via POST method, the request will be triggered in the home
+  route ("/") -->
+
+
   <form class="" action="/" method="post">
-
-  <!-- The input will generate a new item with the name newItem-->
+    <!-- The input will generate a new item with the name newItem-->
     <input type="text" name="newItem">
-
     <button type="submit" name="button">Add</button>
   </form>
 
