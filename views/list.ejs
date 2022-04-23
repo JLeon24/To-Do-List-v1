@@ -4,36 +4,46 @@
 <head>
   <meta charset="utf-8">
   <title>ToDo List v1</title>
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
-  <!-- Pass the value to kindOfDay from BackEnd-->
-  <h1> <%= kindOfDay %> </h1>
 
-  <ul>
+  <div class="box" id="heading">
 
+    <!-- Pass the value to kindOfDay from BackEnd-->
+    <h1> <%= listTitle %> </h1>
+
+  </div>
+
+  <div class="box">
     <!-- Created a for loop inside the ul that will loop through the entire length of newListItems array.
-    It will then render a new li for each newListItems in the array.
+      It will then render a new li for each newListItems in the array.
 
-    Used EJS sytanx to add control flow-->
-
+      Used EJS sytanx to add control flow-->
     <%for (var i = 0; i < newListItems.length; i++){%>
-    <li> <%= newListItems[i] %></li>
+    <div class="item">
+      <input type="checkbox">
+      <p><%= newListItems[i] %></p>
+    </div>
     <% } %>
 
-  </ul>
+    <!-- Created a form to send data to the BackEnd via POST method, the request will be triggered in the home
+    route ("/") -->
 
-  <!-- Created a form to send data to the BackEnd via POST method, the request will be triggered in the home
-  route ("/") -->
+    <form class="item" action="/" method="post">
+      <!-- The input will generate a new item with the name newItem-->
+      <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
+      <button type="submit" name="button">+</button>
+    </form>
 
-
-  <form class="" action="/" method="post">
-    <!-- The input will generate a new item with the name newItem-->
-    <input type="text" name="newItem">
-    <button type="submit" name="button">Add</button>
-  </form>
+  </div>
 
 
 </body>
+
+<footer>
+  Created by: Leon Rañon
+</footer>
 
 </html>
