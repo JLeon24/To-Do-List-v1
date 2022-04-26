@@ -4,7 +4,9 @@ const express = require("express");
 const bodyParser = require("body-parser")
 const app = express();
 const date = require(__dirname + "/date.js");
-let port = 3000; // Created a variable and assign a value of the port to use
+const port = 3000; // Created a variable and assign a value of the port to use
+
+console.log(date());
 
 app.use(bodyParser.urlencoded({ // Used to parse data from the webpage
   extended: true
@@ -20,9 +22,8 @@ let workItems = [];
 //--------------- Load up to home page, to view the current date and list items
 
 app.get("/", (req, res) => {
-  let today = new Date(); // Created a variable to store the date today (method)
 
-
+const day = date();
 
   // Render EJS and pass the value of day (kindOfDay) and items(newListItems) to the FrontEnd (EJS file)
   res.render("list", {
