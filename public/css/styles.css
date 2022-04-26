@@ -8,6 +8,7 @@ html {
 h1 {
   color: #fff;
   padding: 10px;
+  text-align: center;
 }
 
 .box {
@@ -49,6 +50,7 @@ p {
   font-size: 20px;
   font-weight: 400;
   color: #00204a;
+  text-align: center;
 }
 
 form {
