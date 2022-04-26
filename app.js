@@ -1,12 +1,12 @@
+//jshint esversion:6
+
 // Required codes to run express, body parser, ejs
 
 const express = require("express");
 const bodyParser = require("body-parser")
 const app = express();
-const date = require(__dirname + "/date.js");
+const date = require(__dirname + "/date.js"); // Created a function in a module. Part of node.js functionality
 const port = 3000; // Created a variable and assign a value of the port to use
-
-console.log(date());
 
 app.use(bodyParser.urlencoded({ // Used to parse data from the webpage
   extended: true
@@ -16,14 +16,14 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public")); // Location for static files
 
-let items = ["Buy Food", "Cook Food", "Eat Food"]; //Created a variable to store initial list items
-let workItems = [];
+const  items = ["Buy Food", "Cook Food", "Eat Food"]; //Created a variable to store initial list items
+const workItems = [];
 
 //--------------- Load up to home page, to view the current date and list items
 
 app.get("/", (req, res) => {
 
-const day = date();
+const day = date.getDay(); // Acquire the value of the date today using a module. A function was created inside a module
 
   // Render EJS and pass the value of day (kindOfDay) and items(newListItems) to the FrontEnd (EJS file)
   res.render("list", {
@@ -38,11 +38,9 @@ const day = date();
 
 //Express code. Handles the POST request, it will catch the data from newItem in FrontEnd
 
-app.post("/", (req, res) => {
+app.post("/", (req, res) => { //route to homepage
 
   let item = req.body.newItem; // the value of the newItem is stored to item using body parser
-
-  console.log(req.body);
 
   if(req.body.list === "Work") {
     workItems.push(item);
@@ -56,8 +54,7 @@ app.post("/", (req, res) => {
 });
 
 
-
-app.get("/work", (req, res) => {
+app.get("/work", (req, res) => { //route to work page
 res.render("list", {
     listTitle: "Work List",
     newListItems: workItems
@@ -65,14 +62,8 @@ res.render("list", {
 
 });
 
-// app.post("/", (req, res) => {
-//   let item = req.body.newItem;
-//   workItems.push(item);
-//   res.redirect("/work");
-// });
 
-
-app.get("/about", (req, res) => {
+app.get("/about", (req, res) => {  //route to about poge
 res.render("about");
 });
 

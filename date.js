@@ -1,6 +1,6 @@
-module.exports = getDay;
+//jshint esversion:6
 
-function getDate(){
+module.exports.getDate = function() { //refactor to anonymous function
   let today = new Date(); // Created a variable to store the date today (method)
 
   //Created an object and assigned to a variable. Used to format the date
@@ -12,13 +12,12 @@ function getDate(){
   }
 
   // added the object options as an argument and a callback to the variable day
-  let day = today.toLocaleDateString("en-US", options);
-
-  return day;
+  return today.toLocaleDateString("en-US", options); //refactor and removed the variable
 }
 
+//Added a function to get the day, didn't refactor these line of codes as a comparison
+module.exports.getDay = getDay;
 
-//Added a function to get the day
 function getDay(){
   let today = new Date(); // Created a variable to store the date today (method)
 
@@ -32,3 +31,5 @@ function getDay(){
 
   return day;
 }
+
+console.log(module.exports);
