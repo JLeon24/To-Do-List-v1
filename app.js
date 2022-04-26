@@ -3,6 +3,7 @@
 const express = require("express");
 const bodyParser = require("body-parser")
 const app = express();
+const date = require(__dirname + "/date.js");
 let port = 3000; // Created a variable and assign a value of the port to use
 
 app.use(bodyParser.urlencoded({ // Used to parse data from the webpage
@@ -21,16 +22,7 @@ let workItems = [];
 app.get("/", (req, res) => {
   let today = new Date(); // Created a variable to store the date today (method)
 
-  //Created an object and assigned to a variable. Used to format the date
-  let options = {
-    weekday: "long",
-    year: "numeric",
-    day: "numeric",
-    month: "long"
-  }
 
-  // added the object options as an argument and a callback to the variable day
-  let day = today.toLocaleDateString("en-US", options);
 
   // Render EJS and pass the value of day (kindOfDay) and items(newListItems) to the FrontEnd (EJS file)
   res.render("list", {
@@ -46,9 +38,41 @@ app.get("/", (req, res) => {
 //Express code. Handles the POST request, it will catch the data from newItem in FrontEnd
 
 app.post("/", (req, res) => {
+
   let item = req.body.newItem; // the value of the newItem is stored to item using body parser
-  items.push(item); // Push the item value to the items array
-  res.redirect("/"); // Redirect to the home route
+
+  console.log(req.body);
+
+  if(req.body.list === "Work") {
+    workItems.push(item);
+    res.redirect("/work");
+  }
+  else {
+    items.push(item); // Push the item value to the items array
+    res.redirect("/"); // Redirect to the home route
+  }
+
+});
+
+
+
+app.get("/work", (req, res) => {
+res.render("list", {
+    listTitle: "Work List",
+    newListItems: workItems
+  });
+
+});
+
+// app.post("/", (req, res) => {
+//   let item = req.body.newItem;
+//   workItems.push(item);
+//   res.redirect("/work");
+// });
+
+
+app.get("/about", (req, res) => {
+res.render("about");
 });
 
 

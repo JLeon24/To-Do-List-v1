@@ -1,17 +1,9 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
-<head>
-  <meta charset="utf-8">
-  <title>ToDo List v1</title>
-  <link rel="stylesheet" href="css/styles.css">
-</head>
-
-<body>
+<%- include("header") -%>
 
   <div class="box" id="heading">
 
     <!-- Pass the value to kindOfDay from BackEnd-->
+    
     <h1> <%= listTitle %> </h1>
 
   </div>
@@ -34,16 +26,10 @@
     <form class="item" action="/" method="post">
       <!-- The input will generate a new item with the name newItem-->
       <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
-      <button type="submit" name="button">+</button>
+      <button type="submit" name="list" value=<%= listTitle %>> + </button>
     </form>
 
   </div>
 
 
-</body>
-
-<footer>
-  Created by: Leon Rañon
-</footer>
-
-</html>
+  <%- include("footer") -%>
