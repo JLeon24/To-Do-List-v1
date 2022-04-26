@@ -16,14 +16,14 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public")); // Location for static files
 
-const  items = ["Buy Food", "Cook Food", "Eat Food"]; //Created a variable to store initial list items
+const items = ["Buy Food", "Cook Food", "Eat Food"]; //Created a variable to store initial list items
 const workItems = [];
 
 //--------------- Load up to home page, to view the current date and list items
 
 app.get("/", (req, res) => {
 
-const day = date.getDay(); // Acquire the value of the date today using a module. A function was created inside a module
+  const day = date.getDay(); // Acquire the value of the date today using a module. A function was created inside a module
 
   // Render EJS and pass the value of day (kindOfDay) and items(newListItems) to the FrontEnd (EJS file)
   res.render("list", {
@@ -42,11 +42,10 @@ app.post("/", (req, res) => { //route to homepage
 
   let item = req.body.newItem; // the value of the newItem is stored to item using body parser
 
-  if(req.body.list === "Work") {
+  if (req.body.list === "Work") {
     workItems.push(item);
     res.redirect("/work");
-  }
-  else {
+  } else {
     items.push(item); // Push the item value to the items array
     res.redirect("/"); // Redirect to the home route
   }
@@ -55,7 +54,7 @@ app.post("/", (req, res) => { //route to homepage
 
 
 app.get("/work", (req, res) => { //route to work page
-res.render("list", {
+  res.render("list", {
     listTitle: "Work List",
     newListItems: workItems
   });
@@ -63,8 +62,8 @@ res.render("list", {
 });
 
 
-app.get("/about", (req, res) => {  //route to about poge
-res.render("about");
+app.get("/about", (req, res) => { //route to about page
+  res.render("about");
 });
 
 
