@@ -16,9 +16,6 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public")); // Location for static files
 
-const items = ["Buy Food", "Cook Food", "Eat Food"]; //Created a variable to store initial list items
-const workItems = [];
-
 //--------------- Load up to home page, to view the current date and list items
 
 app.get("/", (req, res) => {
