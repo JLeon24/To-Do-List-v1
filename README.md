@@ -2,10 +2,4 @@
 A simple to do list app
 
 Technologies used:
-HTML
-CSS
-JavaScript
-Express.js
-Node.js
-MongoDB
-Mongoose
+HTML, CSS, JavaScript, Express.js. Node.js, MongoDB, Mongoose
