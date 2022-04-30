@@ -96,17 +96,33 @@ app.get("/", (req, res) => {
 //Express code. Handles the POST request, it will catch the data from newItem in FrontEnd
 
 app.post("/", (req, res) => { //route to homepage
+  const itemName = req.body.newItem;
+  const item = new Item({
+    name: itemName
+  });
+  item.save();
+  res.redirect("/"); // Redirect to the home route, to show the new item
 
-  let item = req.body.newItem; // the value of the newItem is stored to item using body parser
+  // const item = req.body.newItem; // the value of the newItem is stored to item using body parser
+  // if (req.body.list === "Work") {
+  //   workItems.push(item);
+  //   res.redirect("/work");
+  // } else {
+  //   items.push(item); // Push the item value to the items array
+  //   res.redirect("/"); // Redirect to the home route
+  // }
+});
 
-  if (req.body.list === "Work") {
-    workItems.push(item);
-    res.redirect("/work");
-  } else {
-    items.push(item); // Push the item value to the items array
-    res.redirect("/"); // Redirect to the home route
-  }
+app.post("/delete",(req,res) => {
+  const checkedItemId = req.body.checkbox;
 
+  Item.findByIdAndRemove(checkedItemId, function(err){
+    if(!err){
+         console.log("Successfully deleted checked item");
+    }
+  });
+
+  res.redirect("/");
 });
 
 
