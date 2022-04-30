@@ -17,11 +17,13 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public")); // Location for static files
 
-mongoose.connect("mongodb://localhost:27017/todoListDB", {useNewUrlParser: true}); // Add mongoose Database
+mongoose.connect("mongodb://localhost:27017/todoListDB", {
+  useNewUrlParser: true
+}); // Add mongoose Database
 
 //Created a schema
 const itemsSchema = {
-  name : String
+  name: String
 };
 
 //Created a model that use the Schema
@@ -30,27 +32,19 @@ const Item = mongoose.model("Item", itemsSchema);
 //Add documents to the Database
 
 const item1 = new Item({
-  name: "Welcome to your ToDo List."
+  name: "Welcome to your ToDo List."
 });
 
 const item2 = new Item({
-  name: "Hit the + button to add a new item."
+  name: "Hit the + button to add a new item."
 });
 
 const item3 = new Item({
-  name: "<-- Hit this to delete an item."
+  name: "<-- Hit this to delete an item."
 });
 
 const defaultItems = [item1, item2, item3];
 
-// Insert the items to the database
-// Item.insertMany(defaultItems, function(err){
-//   if(err){
-//     console.log(err);
-//   } else {
-//     console.log("Successfully saved default items to DB");
-//   }
-// });
 
 // Item.deleteOne({_id: '6268d6ed0b937738e41672e6' }, function(err){
 //   if(err){
@@ -68,10 +62,30 @@ app.get("/", (req, res) => {
 
   const day = date.getDay(); // Acquire the value of the date today using a module. A function was created inside a module
 
-  // Render EJS and pass the value of day (kindOfDay) and items(newListItems) to the FrontEnd (EJS file)
-  res.render("list", {
-    listTitle: day,
-    newListItems: items
+
+  Item.find({}, function(err, foundItems) { // Acquire the value of items in your Database
+
+    if (foundItems.length === 0) { // Check if the database is empty
+
+      // Insert the items to the database
+      Item.insertMany(defaultItems, function(err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Successfully saved default items to DB");
+        }
+      });
+
+      res.redirect("/"); // redirect to the root after adding the default items in the Database
+
+    } else {
+      // Render EJS and pass the value of day (kindOfDay) and items(newListItems) to the FrontEnd (EJS file)
+      res.render("list", {
+        listTitle: day,
+        newListItems: foundItems
+      });
+    }
+
   });
 
 });

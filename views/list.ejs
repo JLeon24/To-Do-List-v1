@@ -10,15 +10,16 @@
 
 <div class="box">
   <!-- Created a for loop inside the ul that will loop through the entire length of newListItems array.
-      It will then render a new li for each newListItems in the array.
+      It will then render a new li for each newListItems in the array. -->
 
-      Used EJS sytanx to add control flow-->
-  <%for (var i = 0; i < newListItems.length; i++){%>
-  <div class="item">
-    <input type="checkbox">
-    <p><%= newListItems[i] %></p>
-  </div>
-  <% } %>
+
+
+  <% newListItems.forEach(function(item){ %>
+      <div class="item">
+        <input type="checkbox">
+        <p><%= item.name %></p>
+    </div>
+  <% }) %>
 
   <!-- Created a form to send data to the BackEnd via POST method, the request will be triggered in the home
     route ("/") -->
