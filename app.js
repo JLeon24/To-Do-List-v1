@@ -3,7 +3,8 @@
 // Required codes to run express, body parser, ejs
 
 const express = require("express");
-const bodyParser = require("body-parser")
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 const app = express();
 const date = require(__dirname + "/date.js"); // Created a function in a module. Part of node.js functionality
 const port = 3000; // Created a variable and assign a value of the port to use
@@ -16,8 +17,50 @@ app.set("view engine", "ejs");
 
 app.use(express.static("public")); // Location for static files
 
-const items = ["Buy Food", "Cook Food", "Eat Food"]; //Created a variable to store initial list items
-const workItems = [];
+mongoose.connect("mongodb://localhost:27017/todoListDB", {useNewUrlParser: true}); // Add mongoose Database
+
+//Created a schema
+const itemsSchema = {
+  name : String
+};
+
+//Created a model that use the Schema
+const Item = mongoose.model("Item", itemsSchema);
+
+//Add documents to the Database
+
+const item1 = new Item({
+  name: "Welcome to your ToDo List."
+});
+
+const item2 = new Item({
+  name: "Hit the + button to add a new item."
+});
+
+const item3 = new Item({
+  name: "<-- Hit this to delete an item."
+});
+
+const defaultItems = [item1, item2, item3];
+
+// Insert the items to the database
+// Item.insertMany(defaultItems, function(err){
+//   if(err){
+//     console.log(err);
+//   } else {
+//     console.log("Successfully saved default items to DB");
+//   }
+// });
+
+// Item.deleteOne({_id: '6268d6ed0b937738e41672e6' }, function(err){
+//   if(err){
+//     console.log(err);
+//   }
+//   else {
+//     console.log("Successfully deleted one documents");
+//   }
+// });
+
 
 //--------------- Load up to home page, to view the current date and list items
 
