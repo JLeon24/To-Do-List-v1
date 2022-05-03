@@ -1,40 +1,33 @@
 <%- include("header") -%>
 
 <div class="box" id="heading">
-
-  <!-- Pass the value to kindOfDay from BackEnd-->
-
-  <h1> <%= listTitle %> </h1>
+  <h1> <%= listTitle %> </h1> <!--Assign the value of the listTitle using EJS -->
 
 </div>
 
 <div class="box">
-<!-- Created a for loop inside the ul that will loop through the entire length of newListItems array.
-      It will then render a new li for each newListItems in the array. -->
-
-
-<!-- Route responsible for deleting items-->
+  <!-- Used forEach to render new items-->
+  <!-- Route responsible for deleting items -->
 
   <% newListItems.forEach(function(item){ %>
-      <form action="/delete" method="post">
-        <div class="item">
-          <input type="checkbox" name="checkbox" value= "<%= item._id %>" onChange="this.form.submit()"> <!-- Added onChange attr to submit when the checkbox is triggered -->
-          <p><%= item.name %></p>
-      </div>
-      </form>
-  <% }) %>
 
-<!-- Created a form to send data to the BackEnd via POST method, the request will be triggered in the home
-    route ("/") -->
-
-    <!-- Route responsible for adding new items-->
-
-  <form class="item" action="/" method="post">
-    <!-- The input will generate a new item with the name newItem-->
-    <input type="text" name="newItem" placeholder="New Item" autocomplete="off">
-    <button type="submit" name="list" value=<%= listTitle %>> + </button>
+  <form action="/delete" method="post">
+    <div class="item">
+      <input type="checkbox" name="checkbox" value="<%=item._id%>" onChange="this.form.submit()"> <!-- Added onChange attr to submit when the checkbox is triggered -->
+      <p><%= item.name %></p> 
+    </div>
+    <input type="hidden" name="listName" value="<%= listTitle %>"></input> <!-- Used an input with type hidden to add value for listTitle in the form for custom ToDo List-->
   </form>
 
+  <% }) %>
+  <!-- Route responsible for deleting items -->
+
+  <!-- Route responsible for adding new items-->
+  <form class="item" action="/" method="post">
+    <input type="text" name="newItem" placeholder="New Item" autocomplete="off"> <!-- The input will generate a new item with the name newItem-->
+    <button type="submit" name="list" value=<%= listTitle %>> + </button>
+  </form>
+  <!-- Route responsible for adding new items-->
 </div>
 
 
