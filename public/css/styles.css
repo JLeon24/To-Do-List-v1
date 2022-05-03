@@ -1,12 +1,15 @@
 html {
-  background-color: #E4E9FD;
-  background-image: -webkit-linear-gradient(65deg, #222831 50%, #393E46 50%);
-  min-height: 1000px;
+  background-color: #393E46;
+  background-image: -webkit-linear-gradient(80deg, #222831 50%, #393E46 50%);
   font-family: 'Poppins';
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 h1 {
-  color: #fff;
+  color: #EEEEEE;
   padding: 10px;
   text-align: center;
 }
@@ -15,7 +18,7 @@ h1 {
   max-width: 400px;
   margin: 50px auto;
   background: white;
-  border-radius: 5px;
+  border-radius: 0px;
   box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
 }
 
@@ -49,7 +52,7 @@ p {
   padding: 20px;
   font-size: 20px;
   font-weight: 400;
-  color: #00204a;
+  color: #222831;
   text-align: center;
 }
 
@@ -64,7 +67,7 @@ button {
   border-radius: 50%;
   border-color: transparent;
   background-color: #222831;
-  color: #fff;
+  color: #EEEEEE;
   font-size: 30px;
   padding-bottom: 0;
   border-width: 0;
@@ -92,6 +95,6 @@ input[type="text"]:focus {
 }
 
 footer {
-  color: white;
+  color: #EEEEEE;
   text-align: center;
 }
